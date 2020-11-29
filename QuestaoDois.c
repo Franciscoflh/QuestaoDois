@@ -1,7 +1,7 @@
 /*
     Codigo desenvolvido para a cadeira de Algoritmo e Estrutura de Dados
     Professor responsavel é o prof. Gentil
-    Alunos que trabalharam no programa: Lucas Felipe, Wesley Versart, Franscico Remo
+    Alunos que trabalharam no programa: Lucas Felipe, Wesley Versart, Francisco Remo
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -59,7 +59,7 @@ void menu(int opcao){
 
 void registrar(FILE *entrada,FILE *genero,FILE *idade){
     struct pessoa dado;
-
+    int id;
     entrada = fopen("entrada.txt","a+t");
     genero = fopen("genero.txt","a+t");
     idade = fopen("idade.txt","a+t");
@@ -75,17 +75,18 @@ void registrar(FILE *entrada,FILE *genero,FILE *idade){
         fputc(dado.sexo,entrada);
         fprintf(entrada," %s ",dado.nome);
         fprintf(entrada," %d\n",dado.idade);
-
+        fflush(stdin);
         fputc(dado.sexo,genero);
         fprintf(idade,"%d \n", dado.idade);
+        id= dado.idade;
     fclose(entrada);
     fclose(idade);
     fclose(genero);
 }
 
 void copia(FILE *genero,FILE *idade,FILE *saida){
-    int m = 0, f = 0, maior = 0, id;
-    char ler1, ler2[100];
+    int m = 0, f = 0, maior = 0, id[10];
+    char ler1, ler2[10];
 
     saida = fopen("saida.txt","w+t");
     genero = fopen("genero.txt","r+t");
@@ -99,13 +100,17 @@ void copia(FILE *genero,FILE *idade,FILE *saida){
                 f++;
             }
         }
-        while(!feof(idade)){
-            ler2[100] = fgetc(idade);
-            id = atoi(ler2);
-            if(id > maior){
-                maior <- id;
+            while(!feof(idade)){
+            for (int i=0; i<ler2;i++){
+                 id[i] = fgetc(idade);
+
+                if(id[i] > maior){
+                    maior = id[i];
+                    }
+                }
             }
-        }
+
+
 
         fprintf(saida,"O numero de homens: %d\n",m);
         fprintf(saida,"O numero de mulheres: %d\n",f);
